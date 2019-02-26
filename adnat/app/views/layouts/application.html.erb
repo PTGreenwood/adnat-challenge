@@ -4,12 +4,25 @@
     <title>Adnat</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <% if notice || alert %>
+      <div id="notification-wrapper">
+        <% flash.each do |key, value| %>
+          <% if key == 'notice'%>
+            <div class="notice">
+              <%= value %>
+            </div>
+          <% elsif key == 'alert' %>
+            <div class="alert" >
+              <%= value %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

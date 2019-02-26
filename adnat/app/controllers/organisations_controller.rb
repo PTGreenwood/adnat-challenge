@@ -21,10 +21,11 @@ class OrganisationsController < ApplicationController
         @organisation = Organisation.new(organisation_params)
         
         if @organisation.save
-            flash[:success] = "Success! New Organisation Created"
+            flash[:notice] = "Success! New Organisation Created"
             redirect_to @organisation
         else 
             render 'new'
+        end 
     end
 
     # Create Strict requirements for what is entered into the model
