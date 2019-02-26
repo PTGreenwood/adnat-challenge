@@ -1,8 +1,11 @@
+<%= render "layouts/partials/header" %>
+<h2> Show Organisation </h2>
 <p>
-  <strong>Organisation Name:</strong>
+  <strong>Name:</strong>
   <%= @organisation.name %>
 </p>
 <p>
   <strong>Hourly Rate:</strong>
   <%= @organisation.hourly_rate %>
 </p>
+<%= link_to 'Edit', edit_organisation_path(@organisation) %>

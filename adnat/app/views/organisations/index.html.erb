@@ -3,6 +3,10 @@
 <ul>
   <% @organisation.each do |organisation| %>
     <li><%= organisation.name %> at <strong>$<%= organisation.hourly_rate %></strong>
-      <%= link_to 'Show', organisation_path(organisation) %></li>
+      <%= link_to 'Show', organisation_path(organisation) %>
+      <%= link_to 'Edit', edit_organisation_path(organisation) %>
+      <%= link_to 'Destroy', organisation_path(organisation),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></li>
   <% end %>
 </ul>
