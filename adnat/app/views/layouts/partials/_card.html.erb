@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title text-center"><%=name%></h5>
+    <p class="card-text text-center">
+      <%= link_to edit_organisation_path(id) do %>
+        Edit 
+      <% end %> | 
+      <%= link_to "organisations/join/#{id}" do %>
+        Join
+      <% end %></p>
+  </div>
+</div>

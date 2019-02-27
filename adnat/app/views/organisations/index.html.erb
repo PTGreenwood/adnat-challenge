@@ -1,82 +1,79 @@
 <!-- If User not in Organisation display all organisations -->
 <% if current_user.organisation_id.nil?%>
-  You aren't a member of any organisations. <br>
-  Join an existing one or create a new one.
-  <h2> Organisations</h2>
-  <ul>
-    <% @organisation.each do |organisation| %>
-      <li><%= organisation.name %> at <strong>$<%= organisation.hourly_rate %></strong>
-        <%#= link_to 'Show', organisation_path(organisation) %>
-        <%= link_to 'Edit', edit_organisation_path(organisation) %>
-        <%= link_to 'Join', "organisations/join/#{organisation.id}"%><br>
-        <% organisation.users.each do |user| %>
-          <%= user.name %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-  <!-- Not in one. So create an organisation -->
-  <h2> Create Organisation </h2>
-  <%= form_for (@creationOrganisation) do |organisation_form| %>
-    <% if @creationOrganisation.errors.any? %>
-      <div id="error_explanation">
-        <% @creationOrganisation.errors.full_messages.each do |msg| %>
-          <span style="color: red"><strong>Notice: </strong></span>
-          <%= msg %><br>
-        <% end %>
-      </div>
-    <% end %>
-    <p>
-      <%= organisation_form.label :name %>
-      <%= organisation_form.text_field :name %>
-      <br>
-      <%= organisation_form.label :hourly_rate %>
-      <%= organisation_form.text_field :hourly_rate %>
-      <br>
-      <%= organisation_form.submit "Create and Join" %>
-    </p>
-  <% end %>
-  <!-- Else -->
-<% else %>
-  <br>
-  <br>
   <div class="container" >
     <div class="organisation-header">
-      <h4> Organisation you've joined: <%= @organisation.name %> </h4>
       <br>
+      <br>
+      <h5>You aren't a member of any organisations. Join an existing one or create a new one.</h5>
     </div>
-    <div class="card-deck">
-      <div class="card">
-        <div class="card-body">
-          <%= link_to organisation_shifts_path(@organisation.id) do %>
-            <h5 class="card-title">View Shifts</h5>
+    <div class="card-columns">
+      <% @organisation.each do |organisation| %>
+        <%= render 'layouts/partials/card', id: organisation.id, name: organisation.name%>
+      <% end %>
+    </div>
+    <!-- Not in one. So create an organisation -->
+    <hr>
+    <h3> Create Organisation </h3>
+    <%= form_for (@creationOrganisation) do |organisation_form| %>
+      <% if @creationOrganisation.errors.any? %>
+        <div id="error_explanation">
+          <% @creationOrganisation.errors.full_messages.each do |msg| %>
+            <span style="color: red"><strong>Notice: </strong></span>
+            <%= msg %><br>
           <% end %>
-          <p class="card-text"> View, Add and update shifts at this organisation.</p>
-          <p class="card-text"><small class="text-muted">Shift Last updated 3 mins ago</small></p>
         </div>
+      <% end %>
+      <p>
+        <%= organisation_form.label :name %>
+        <%= organisation_form.text_field :name %>
+        <br>
+        <%= organisation_form.label :hourly_rate %>
+        <%= organisation_form.text_field :hourly_rate %>
+        <br>
+        <%= organisation_form.submit "Create and Join" %>
+      </p>
+    <% end %>
+    <!-- Else -->
+  <% else %>
+    <br>
+    <br>
+    <div class="container" >
+      <div class="organisation-header">
+        <h4> Organisation you've joined: <%= @organisation.name %> </h4>
+        <br>
       </div>
-      <div class="card">
-        <div class="card-body">
-          <%= link_to edit_organisation_path(@organisation.id) do %>
-            <h5 class="card-title">Edit Organisation</h5>
-          <% end %>
-          <p class="card-text"> Leave the Organisation. You'll have to rejoin to view the shifts.</p>
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-body">
+            <%= link_to organisation_shifts_path(@organisation.id) do %>
+              <h5 class="card-title">View Shifts</h5>
+            <% end %>
+            <p class="card-text"> View, Add and update shifts at this organisation.</p>
+            <p class="card-text"><small class="text-muted">Shift Last updated 3 mins ago</small></p>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <%= link_to "organisations/leave/#{@organisation.id}" do %>
-            <h5 class="card-title">Leave Organisation</h5>
-          <% end %>
-          <p class="card-text"> Leave the Organisation. You'll have to rejoin to view the shifts.</p>
+        <div class="card">
+          <div class="card-body">
+            <%= link_to edit_organisation_path(@organisation.id) do %>
+              <h5 class="card-title">Edit Organisation</h5>
+            <% end %>
+            <p class="card-text"> Leave the Organisation. You'll have to rejoin to view the shifts.</p>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Placeholder Link</h5>
-          <p class="card-text"> A link left here to beef up the layout on the page.</p>
+        <div class="card">
+          <div class="card-body">
+            <%= link_to "organisations/leave/#{@organisation.id}" do %>
+              <h5 class="card-title">Leave Organisation</h5>
+            <% end %>
+            <p class="card-text"> Leave the Organisation. You'll have to rejoin to view the shifts.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Placeholder Link</h5>
+            <p class="card-text"> A link left here to beef up the layout on the page.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
