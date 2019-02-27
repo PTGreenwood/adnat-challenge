@@ -6,9 +6,6 @@ class Shift < ApplicationRecord
 
   #Finish time must be > than start time (at this stage. Overnight shifts may complicate things).
 
-  #Must have an hourly rate attached
-  validates :hourly_rate, presence: true
-
   #Referential Constrains
   belongs_to :user, optional: false #A shift must belong to a user.
 
