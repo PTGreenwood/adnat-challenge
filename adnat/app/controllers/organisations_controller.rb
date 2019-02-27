@@ -3,6 +3,8 @@ class OrganisationsController < ApplicationController
     #Display all Organisations
     def index
         @organisation = Organisation.all
+        @creationOrganisation = Organisation.new
+        #@organisation = Organisation.find(16)
     end
 
     #Initial Creation of new organisation for form.
@@ -29,7 +31,8 @@ class OrganisationsController < ApplicationController
             flash[:notice] = "Success! New Organisation Created"
             redirect_to index
         else 
-            render 'new'
+            flash[:alert] = "Error on Organisation Creation. Check if a field is blank"
+            redirect_to index
         end 
     end
 
