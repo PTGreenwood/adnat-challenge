@@ -1,0 +1,73 @@
+<script>
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+<%= render "layouts/partials/header" %>
+<!-- If User not in Organisation display all organisations -->
+<h2> <%=@organisation.name %> </h2>
+<br>
+<strong> Shifts </strong><br>
+<br>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+<table id="myTable">
+  <tr class="header">
+    <th>Employee Name</th>
+    <th>Shift date</th>
+    <th>Start time</th>
+    <th>Finish time</th>
+    <th>Break length (minutes)</th>
+    <th>Hours Worked</th>
+    <th>Shift cost</th>
+  </tr>
+  <tr>
+    <% @organisation.users.each do |user| %>
+      <% user.shifts.each do |shift| %>
+        <td>1</td>
+        <td><%= user.name %></strong></td>
+      <td><%= shift.start%></td>
+      <td><%= shift.finish %></td>
+      <td><%= shift.breaklength %></td>
+      <td>1</td>
+      <td>1</td>
+    <% end %>
+  <% end %>
+</tr>
+<!-- Create shift section at bottom of table -->
+<tr>
+  <%= form_with(model: @shift, local: true) do |form| %>
+    <td><%= current_user.name %></td>
+    <% if @shift.errors.any? %>
+      <div id="error_explanation">
+        <% @shift.errors.full_messages.each do |msg| %>
+          <span style="color: red"><strong>Notice: </strong></span>
+          <%= msg %><br>
+        <% end %>
+      </div>
+    <% end %>
+    <td><%= form.text_field :shift_date %></td>
+    <td><%= form.text_field :start_time %></td>
+    <td><%= form.text_field :end_time %></td>
+    <td><%= form.text_field :break_length %></td>
+    <td colspan = '2'><%= form.submit "Update" %></td>
+  <% end %>
+</tr>
+</table>
