@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_035019) do
+ActiveRecord::Schema.define(version: 2019_02_27_002328) do
 
   create_table "organisations", force: :cascade do |t|
     t.text "name"
     t.float "hourly_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.integer "organisation_id_id"
+    t.text "name"
+    t.text "email"
+    t.text "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organisation_id_id"], name: "index_users_on_organisation_id_id"
   end
 
 end
