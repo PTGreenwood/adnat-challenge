@@ -3,12 +3,11 @@ Rails.application.routes.draw do
 
   get 'static_pages/index'
   resources :organisations do
-    resources :users do
-      resources :shifts
-    end 
+    resources :users #do
+      #resources :shifts
+    #end 
+    resources :shifts
   end
-
-
 
   #Custom routing.
   get 'organisations/join/:id', to: 'users#join'

@@ -1,4 +1,3 @@
-<%= render "layouts/partials/header" %>
 <!-- If User not in Organisation display all organisations -->
 <% if current_user.organisation_id.nil?%>
   You aren't a member of any organisations. <br>
@@ -39,10 +38,45 @@
   <% end %>
   <!-- Else -->
 <% else %>
-  <h2> <%= @organisation.name %> </h2>
-  <p>
-    View Shifts
-    <%= link_to 'Edit', edit_organisation_path(@organisation.id) %>
-    <%= link_to 'Leave', "organisations/leave/#{@organisation.id}"%><br>
-  </p>
+  <br>
+  <br>
+  <div class="container" >
+    <div class="organisation-header">
+      <h4> Organisation you've joined: <%= @organisation.name %> </h4>
+      <br>
+    </div>
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
+          <%= link_to organisation_shifts_path(@organisation.id) do %>
+            <h5 class="card-title">View Shifts</h5>
+          <% end %>
+          <p class="card-text"> View, Add and update shifts at this organisation.</p>
+          <p class="card-text"><small class="text-muted">Shift Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <%= link_to edit_organisation_path(@organisation.id) do %>
+            <h5 class="card-title">Edit Organisation</h5>
+          <% end %>
+          <p class="card-text"> Leave the Organisation. You'll have to rejoin to view the shifts.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <%= link_to "organisations/leave/#{@organisation.id}" do %>
+            <h5 class="card-title">Leave Organisation</h5>
+          <% end %>
+          <p class="card-text"> Leave the Organisation. You'll have to rejoin to view the shifts.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Placeholder Link</h5>
+          <p class="card-text"> A link left here to beef up the layout on the page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
