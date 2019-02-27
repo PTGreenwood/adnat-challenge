@@ -2,15 +2,20 @@ class OrganisationsController < ApplicationController
 
     #Display all Organisations
     def index
-        @organisation = Organisation.all
+        if(current_user.organisation_id.nil?)
+            @organisation = Organisation.all
+        else 
+            @organisation = Organisation.find(current_user.organisation_id)
+        end 
+
         @creationOrganisation = Organisation.new
-        #@organisation = Organisation.find(16)
     end
 
     #Initial Creation of new organisation for form.
     def new
         @organisation = Organisation.new
     end
+
 
     #Display Organisation by given ID Paramater
     def show
@@ -57,12 +62,14 @@ class OrganisationsController < ApplicationController
             redirect_to organisation_path
         end 
     end
+
     # Create Strict requirements for what is entered into the model
     # and ultimately the Database
     private
     def organisation_params
         params.require(:organisation).permit(:name, :hourly_rate)
     end
+
 
 
 end

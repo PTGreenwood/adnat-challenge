@@ -4,4 +4,8 @@ class Organisation < ApplicationRecord
 
     #Must have an hourly rate attached
     validates :hourly_rate, presence: true
+
+    #Referential Constratins
+    has_many :users
+    
 end

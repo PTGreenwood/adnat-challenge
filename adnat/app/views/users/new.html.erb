@@ -1,0 +1,32 @@
+<h2> Register </h2>
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <% @user.errors.full_messages.each do |msg| %>
+        <span style="color: red"><strong>Notice: </strong></span>
+        <%= msg %><br>
+      <% end %>
+    </div>
+  <% end %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <br>
+    <br>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+    <br>
+    <br>
+    Password <br>
+    (6 Characters minimum)
+    <br>
+    <%= form.password_field :password %>
+    <br>
+    <br>
+    Confirm Password<br>
+    <%= form.password_field :confirm_password %>
+    <br>
+    <%= form.submit "Create Account" %>
+  </p>
+<% end %>
+<%#= link_to 'Back', user_path%>
