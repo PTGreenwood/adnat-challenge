@@ -1,0 +1,11 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="https://openclipart.org/image/2400px/svg_to_png/24793/Anonymous-Paper-4-icon.png" class="nav_logo" alt="Logo"> </div>
+  Adnat - Challenge
+</a>
+<form class="form-inline">
+  Welcome&nbsp <strong> <%= current_user.email %> </strong> <span style="padding: 10px">| </span>
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> <span style="padding: 10px">| </span>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link', :style => 'margin-right: 40px'%>
+</form>
+</nav>
