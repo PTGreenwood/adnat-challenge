@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   #Custom routing.
   get 'organisations/join/:id', to: 'users#join'
+  get 'organisations/leave/:id', to: 'users#leave'
 
   resources :users
   root 'static_pages#index'

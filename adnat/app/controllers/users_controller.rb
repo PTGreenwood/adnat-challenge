@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
 
+    #Join the specified organisation
     def join
         @organisation = Organisation.find(params[:id])
         print ("Current users id: #{current_user.id}")
         current_user.organisation_id = @organisation.id
         current_user.save
         
+        redirect_to index
+    end 
+
+    #Leave a given organisation
+    def leave
+        current_user.organisation_id = nil
+        current_user.save
         redirect_to index
     end 
 

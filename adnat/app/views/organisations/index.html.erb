@@ -45,6 +45,6 @@ Logged in as <%= current_user.name %> <%= link_to 'Logout' %><br>
   <p>
     View Shifts
     <%= link_to 'Edit', edit_organisation_path(@organisation.id) %>
-    Leave
+    <%= link_to 'Leave', "organisations/leave/#{@organisation.id}"%><br>
   </p>
 <% end %>
