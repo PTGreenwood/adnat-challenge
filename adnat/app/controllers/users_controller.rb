@@ -7,14 +7,14 @@ class UsersController < ApplicationController
         current_user.organisation_id = @organisation.id
         current_user.save
         
-        redirect_to index
+        redirect_to '/'
     end 
 
     #Leave a given organisation
     def leave
         current_user.organisation_id = nil
         current_user.save
-        redirect_to index
+        redirect_to '/'
     end 
 
     private
