@@ -1,9 +1,12 @@
 class Shift < ApplicationRecord
 
-  #Must have a name of minimum 1 character.
-  validates :start_time, presence: true #Must have a start time.
-  validates :finish_time, presence: true, numericality: {greater_than: :start_time} #Must have an end time and be greater than start time
+  validates :start, presence: true #Must have a start time.
+  validates :finish, presence: true #Must have an end time
+  validates :breaklength, presence: true #Break length is required
 
+  validates_time :start, :between => ['12:00am', '11:59pm'] #Start time must be a valid time
+  validates_time :finish, :between => ['12:00am', '11:59pm'] #End time must be a valid time
+  validates_time :finish, :after => lambda {:start}
   #Finish time must be > than start time (at this stage. Overnight shifts may complicate things).
 
   #Referential Constrains

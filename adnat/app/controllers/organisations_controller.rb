@@ -19,12 +19,22 @@ class OrganisationsController < ApplicationController
 
     #Display Organisation by given ID Paramater
     def show
-        @organisation = Organisation.find(params[:id])
+        begin
+            @organisation = Organisation.find(params[:id])
+        rescue
+            print "Bad Organisation ID - Redirecting \n"
+            redirect_to organisations_path
+        end 
     end 
 
     #Edit an existing organisation
     def edit
-        @organisation = Organisation.find(params[:id])
+        begin
+            @organisation = Organisation.find(params[:id])
+        rescue
+            print "Bad Organisation ID - Redirecting \n"
+            redirect_to organisations_path
+        end 
     end
 
     #Create and Join a new Organisation

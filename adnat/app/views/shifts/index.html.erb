@@ -47,19 +47,22 @@
       <th>Hours Worked</th>
       <th>Shift cost</th>
     </tr>
-    <tr>
-      <% @organisation.users.each do |user| %>
-        <% user.shifts.each do |shift| %>
-          <td>1</td>
+    <% @organisation.users.each do |user| %>
+      <% user.shifts.each do |shift| %>
+        <tr>
           <td><%= user.name %></strong></td>
-        <td><%= shift.start%></td>
-        <td><%= shift.finish %></td>
+        <td><%=shift.start.to_date.strftime("%e/%m/%Y") %></td>
+        <td><%= shift.start.to_time.strftime("%I:%M%p")%></td>
+        <td><%= shift.finish.to_time.strftime("%I:%M%p") %></td>
         <td><%= shift.breaklength %></td>
-        <td>1</td>
-        <td>1</td>
-      <% end %>
+        <% shiftLength = number_with_precision(((shift.finish - shift.start) / 60), :precision => 2)%>
+        <% hoursWorked = number_with_precision((shiftLength.to_f - shift.breaklength.to_f), :precision => 2)%>
+        <td>
+          <%= number_with_precision((hoursWorked.to_f / 60), :precision => 2) %></td>
+        <td>$<%= number_with_precision((@organisation.hourly_rate.to_f * (hoursWorked.to_f / 60).to_f), :precision => 2)%></td>
+      </tr>
     <% end %>
-  </tr>
+  <% end %>
   <!-- Create shift section at bottom of table -->
   <tr>
     <%= form_with(model: @shift, local: true) do |form| %>
