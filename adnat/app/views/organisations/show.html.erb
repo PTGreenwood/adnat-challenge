@@ -1,11 +1,25 @@
-<%= render "layouts/partials/header" %>
-<h2> Show Organisation </h2>
-<p>
-  <strong>Name:</strong>
-  <%= @organisation.name %>
-</p>
-<p>
-  <strong>Hourly Rate:</strong>
-  <%= @organisation.hourly_rate %>
-</p>
-<%= link_to 'Edit', edit_organisation_path(@organisation) %>
+<div class="container"><br>
+  <div class="row justify-content-md-center mt-5">
+    <div class="col col-md-5">
+      <div class="card text-center">
+        <div class="card-body" >
+          <h3 class="card-title text-center">View Organisation</h3>
+          <p class="card-text text-center"><br>
+            <strong>Organisation Name:</strong> <%=@organisation.name%><br>
+            <strong>Hourly Rate: </strong><%= @organisation.hourly_rate%><br>
+            <br>
+            <%= link_to edit_organisation_path(@organisation.id) do %>
+              Edit 
+            <% end %>
+            <% if current_user.organisation_id.nil?%>
+              | 
+              <%= link_to "organisations/join/#{@organisation_id}" do %>
+                Join
+              <% end %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

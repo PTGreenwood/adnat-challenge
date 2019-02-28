@@ -19,22 +19,16 @@ class OrganisationsController < ApplicationController
 
     #Display Organisation by given ID Paramater
     def show
-        begin
-            @organisation = Organisation.find(params[:id])
-        rescue
-            print "Bad Organisation ID - Redirecting \n"
-            redirect_to organisations_path
-        end 
+        if check_validity(params[:id])
+            @organisation = @organisation = Organisation.find(params[:id])
+        end
     end 
 
     #Edit an existing organisation
     def edit
-        begin
-            @organisation = Organisation.find(params[:id])
-        rescue
-            print "Bad Organisation ID - Redirecting \n"
-            redirect_to organisations_path
-        end 
+        if check_validity(params[:id])
+            @organisation = @organisation = Organisation.find(params[:id])
+        end
     end
 
     #Create and Join a new Organisation
@@ -80,6 +74,19 @@ class OrganisationsController < ApplicationController
         params.require(:organisation).permit(:name, :hourly_rate)
     end
 
+    # DRYING up some code
+    # Checks validity of an organisation. If it doesn't exist. Will just redirect
+    private
+    def check_validity(id)
+        begin
+            Organisation.find(id)
+            return true
+        rescue
+            print "Bad Organisation ID - Redirecting \n"
+            redirect_to organisations_path
+            return false
+        end 
+    end
 
 
 end

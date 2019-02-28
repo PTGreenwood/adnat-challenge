@@ -1,19 +1,30 @@
-<%= form_with(model: @organisation, local: true) do |organisation_form| %>
-  <% if @organisation.errors.any? %>
-    <div id="error_explanation">
-      <% @organisation.errors.full_messages.each do |msg| %>
-        <span style="color: red"><strong>Notice: </strong></span>
-        <%= msg %><br>
+<div class="container"><br>
+  <div class="row justify-content-md-center mt-5">
+    <div class="col col-md-5">
+      <%= form_with(model: @organisation, local: true) do |organisation_form| %>
+        <div class="card text-center">
+          <div class="card-body" >
+            <h3 class="card-title text-center">Edit Organisation</h3>
+            <p class="card-text text-center"><br>
+              <%= organisation_form.label :name %>
+              <%= organisation_form.text_field :name %>
+              <br>
+              <%= organisation_form.label :hourly_rate %>
+              <%= organisation_form.text_field :hourly_rate %>
+              <br>
+              <%= organisation_form.submit "Update" %>
+            </p>
+          </div>
+        </div>
       <% end %>
     </div>
-  <% end %>
-  <p>
-    <%= organisation_form.label :name %>
-    <%= organisation_form.text_field :name %>
-    <br>
-    <%= organisation_form.label :hourly_rate %>
-    <%= organisation_form.text_field :hourly_rate %>
-    <br>
-    <%= organisation_form.submit "Update" %>
-  </p>
-<% end %>
+    <% if @organisation.errors.any? %>
+      <div id="error_explanation">
+        <% @organisation.errors.full_messages.each do |msg| %>
+          <span style="color: red"><strong>Notice: </strong></span>
+          <%= msg %><br>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
