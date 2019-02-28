@@ -56,6 +56,9 @@ class OrganisationsController < ApplicationController
         end
     end
 
+    # Destroy Organisation with given ID.
+    # Note: Currently no link to destory an organisation. This would be another feature with
+    # CANCAN for permissions. Only the creator of the organisation can delete.
     def destroy
         @organisation = Organisation.find(params[:id])
         if @organisation.destroy
