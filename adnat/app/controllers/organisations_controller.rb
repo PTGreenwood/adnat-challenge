@@ -32,13 +32,12 @@ class OrganisationsController < ApplicationController
     end
 
     #Create and Join a new Organisation
-    #TODO: Automatically Join new Organisation
     def create
         @organisation = Organisation.new(organisation_params)
         
         if @organisation.save
             flash[:notice] = "Success! New Organisation Created"
-            redirect_to index
+            redirect_to "/organisations/join/#{@organisation.id}"
         else 
             flash[:alert] = "Error on Organisation Creation. Check if a field is blank"
             redirect_to index
