@@ -16,5 +16,5 @@ organisations = [
 ]
 
 organisations.each do |name, hourly_rate|
-    Organisation.create( name: name, hourly_rate: population )
+    Organisation.create( name: name, hourly_rate: hourly_rate )
   end
