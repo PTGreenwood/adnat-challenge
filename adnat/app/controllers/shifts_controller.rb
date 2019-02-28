@@ -71,7 +71,7 @@ class ShiftsController < ApplicationController
             end
         rescue
             flash[:alert] = "Error on Shift Creation. Check Entry and Try again"
-            redirect_to organisations_path
+            render 'edit'
         end
     end
     
