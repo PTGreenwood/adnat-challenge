@@ -20,14 +20,14 @@ class OrganisationsController < ApplicationController
     #Display Organisation by given ID Paramater
     def show
         if check_validity(params[:id])
-            @organisation = @organisation = Organisation.find(params[:id])
+            @organisation = Organisation.find(params[:id])
         end
     end 
 
     #Edit an existing organisation
     def edit
         if check_validity(params[:id])
-            @organisation = @organisation = Organisation.find(params[:id])
+            @organisation = Organisation.find(params[:id])
         end
     end
 

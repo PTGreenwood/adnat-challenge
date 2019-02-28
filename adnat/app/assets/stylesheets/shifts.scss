@@ -26,6 +26,13 @@
   border-bottom: 1px solid #ddd;
 }
 
+#shiftTable th:hover {
+  cursor: default;
+}
+#shiftTable tr:hover {
+  cursor: pointer;
+}
+
 #shiftTable tr.header,
 #shiftTable tr:hover {
   /* Add a grey background color to the table header and on hover */

@@ -1,0 +1,44 @@
+<!-- Date Picker sourced from https://jqueryui.com/datepicker/ -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  //Setup Datepicker functionality.
+  $(function() {
+    $("#datepicker").datepicker();
+  });
+</script>
+<div class="container"><br>
+  <div class="row justify-content-md-center">
+    <div class="col col-md-5">
+      <%= form_with(model: @shift, local: true) do |shift_form| %>
+        <div class="card text-center">
+          <div class="card-body" >
+            <h3 class="card-title text-center">Edit Shift</h3>
+            <p class="card-text text-center"><br>
+              <%= shift_form.label :shift_date %>
+              <%= shift_form.text_field :shift_date, placeholder: @shift.start.to_date.strftime("%e/%m/%Y"), id: 'datepicker'%><br>
+              <%= shift_form.label :start_time %>
+              <%= shift_form.text_field :start_time, value: @shift.start.to_time.strftime("%I:%M%p") %>
+              <br>
+              <%= shift_form.label :finish_time %>
+              <%= shift_form.text_field :finish_time, value: @shift.finish.to_time.strftime("%I:%M%p") %>
+              <br>
+              <%= shift_form.label :break_length %>
+              <%= shift_form.text_field :break_length, value: @shift.breaklength %>
+              <br>
+              <%= shift_form.submit "Update" %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if @shift.errors.any? %>
+      <div id="error_explanation">
+        <% @shift.errors.full_messages.each do |msg| %>
+          <span style="color: red"><strong>Notice: </strong></span>
+          <%= msg %><br>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
